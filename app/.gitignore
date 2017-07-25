@@ -19,7 +19,7 @@ out/
 build/
 gradle
 androidTest/
-test/
+#test/
 target/
 gradlew
 gradlew.bat
