@@ -17,7 +17,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
  * @author Md. Rashadul Alam
  */
 
-public class WaitTests {
+public class PlayStoreTest {
 
     WebDriver driver;
 
@@ -27,13 +27,13 @@ public class WaitTests {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         // Set android deviceName desired capability. Set your device name.
-        capabilities.setCapability("deviceName", "XT1562");
+        capabilities.setCapability("deviceName", "353358060251001");
 
         // Set BROWSER_NAME desired capability. It's Android in our case here.
         capabilities.setCapability(CapabilityType.BROWSER_NAME, "Android");
 
         // Set android VERSION desired capability. Set your mobile device's OS version.
-        capabilities.setCapability(CapabilityType.VERSION, "6.0.1");
+        capabilities.setCapability(CapabilityType.VERSION, "5.0.2");
 
         // Set android platformName desired capability. It's Android in our case here.
         capabilities.setCapability("platformName", "Android");
@@ -41,12 +41,16 @@ public class WaitTests {
         // Set android appPackage desired capability. It is
         // com.android.calculator2 for calculator application.
         // Set your application's appPackage if you are using any other app.
-        capabilities.setCapability("appPackage", "com.android.calculator2");
+//        capabilities.setCapability("appPackage", "com.android.settings");
+//        capabilities.setCapability("appPackage", "com.android.vending");
+        capabilities.setCapability("appPackage", "com.android.vending");
 
         // Set android appActivity desired capability. It is
         // com.android.calculator2.Calculator for calculator application.
         // Set your application's appPackage if you are using any other app.
-        capabilities.setCapability("appActivity", "com.android.calculator2.Calculator");
+//        capabilities.setCapability("appActivity", "com.android.settings.Settings");
+//        capabilities.setCapability("appActivity", "com.google.android.finsky.activities.MainActivity");
+        capabilities.setCapability("appActivity", "com.google.android.finsky.activities.MainActivity");
 
         // Created object of RemoteWebDriver will all set capabilities.
         // Set appium server address and port number in URL string.
@@ -58,16 +62,21 @@ public class WaitTests {
     }
 
     @Test
-    public void testFirstCalculator() {
-
+    public void TestMyApps() throws Exception{
 
         // Click on DELETE/CLR button to clear result text box before running test.
-        driver.findElements(By.xpath("//android.widget.Button")).get(0).click();
-
-        // Click on number 2 button.
-        driver.findElement(By.name("7")).click();
-
-        driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+        Thread.sleep(3000);
+        driver.findElement(By.id("com.android.vending:id/positive_button")).click();
+        Thread.sleep(3000);
+        driver.findElement(By.id("com.android.vending:id/navigation_button")).click();
+        Thread.sleep(1000);
+//        driver.findElement(By.tagName("My apps & games")).click();
+//        Thread.sleep(3000);
+//
+//        // Click on number 2 button.
+//        driver.findElement(By.name("7")).click();
+//
+//        driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
     }
 
     @After
