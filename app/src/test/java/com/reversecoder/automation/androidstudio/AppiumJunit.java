@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * @author Md. Rashadul Alam
  */
 
-public class PlayStoreTest {
+public class AppiumJunit {
 
     WebDriver driver;
 
