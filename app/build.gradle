@@ -29,9 +29,8 @@ android {
     }
 
     dexOptions {
-        jumboMode = true
-        preDexLibraries = true
-        javaMaxHeapSize "256m"
+        preDexLibraries = false
+        javaMaxHeapSize "4g"
     }
 
     buildTypes {
@@ -49,42 +48,43 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+
+        exclude 'org/openqa/selenium/internal/FindsByClassName.class'
+    }
 }
 
 dependencies {
 //    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "com.android.support:appcompat-v7:$supportlibraryVersion"
     compile 'com.android.support:multidex:1.0.1'
-//    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-//        exclude group: 'com.android.support', module: 'support-annotations'
-//    })
-//    testCompile 'junit:junit:4.12'
-//    testCompile 'org.assertj:assertj-core:3.8.0'
-//    testCompile 'org.testng:testng:6.10'
-//    testCompile 'io.appium:java-client:4.0.0'
+//    compile 'com.reversecoder.adbhelper:adbhelper:1.0-SNAPSHOT'
 
-    compile files('libs/selenium-remote-driver-2.53.1.jar')
     compile files('libs/selenium-api-2.53.1.jar')
-    compile files('libs/junit-4.12.jar')
-    compile files('libs/guava-22.0.jar')
+    compile files('libs/guava-20.0.jar')
     compile files('libs/httpclient-4.5.3.jar')
     compile files('libs/httpcore-4.4.6.jar')
     compile files('libs/commons-logging-1.2.jar')
     compile files('libs/gson-2.8.0.jar')
     compile files('libs/testng-6.10.jar')
-    compile files('libs/assertj-core-3.8.0.jar')
-    compile files('libs/java-client-4.1.2.jar')
-
-//    compile 'com.reversecoder.adbhelper:adbhelper:1.0-SNAPSHOT'
-//    compile 'org.testng:testng:6.10'
-//    compile 'org.assertj:assertj-core:3.8.0'
-//    compile 'org.seleniumhq.selenium:selenium-remote-driver:2.53.1'
-//    compile 'org.seleniumhq.selenium:selenium-api:2.53.1'
-//    compile 'junit:junit:4.12'
-//    compile 'com.google.guava:guava:22.0'
-//    compile 'org.apache.httpcomponents:httpclient:4.5.3'
-//    compile 'org.apache.httpcomponents:httpcore:4.4.6'
-//    compile 'commons-logging:commons-logging:1.2'
-//    compile 'com.google.code.gson:gson:2.8.0'
+    compile files('libs/java-client-3.1.0.jar')
+    compile files('libs/selenium-remote-driver-2.53.1.jar')
 }
 
+task unzipArchive(type: Copy) {
+    from zipTree("$projectDir/libs/selenium-api-2.53.1.jar")
+    into ("$buildDir/libs/selenium-api")
+    include "**/*.class"
+    exclude "**/org/openqa/selenium/internal/FindsByClassName.class"
+}

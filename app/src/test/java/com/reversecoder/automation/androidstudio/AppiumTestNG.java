@@ -8,7 +8,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.net.URL;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import io.appium.java_client.android.AndroidDriver;
@@ -29,23 +28,23 @@ public class AppiumTestNG {
         cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         cap.setCapability(MobileCapabilityType.DEVICE_NAME, "353358060251001");
         cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "4000");
+
         cap.setCapability("appPackage", "com.android.vending");
         cap.setCapability("appActivity", "com.google.android.finsky.activities.MainActivity");
+
 //        cap.setCapability(MobileCapabilityType.APP, "c://apks//seekbarsample.apk");
         cap.setCapability("noReset", true);
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);
-        Set<String> contexts = ((AndroidDriver)driver).getContextHandles();
-        ((AndroidDriver)driver).context("NATIVE");
     }
 
-    @Test
-    public void testSeekBar() throws Exception {
+    @Test(priority = 1, enabled = true)
+    public void testPlayStore() throws Exception {
 //        Thread.sleep(3000);
 //        driver.findElement(By.id("com.android.vending:id/positive_button")).click();
-//        Thread.sleep(3000);
-//        driver.findElement(By.id("com.android.vending:id/navigation_button")).click();
-//        Thread.sleep(3000);
-//        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        Thread.sleep(3000);
+        driver.findElement(By.id("com.android.vending:id/navigation_button")).click();
+        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     @AfterTest
